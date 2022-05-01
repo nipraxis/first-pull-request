@@ -18,7 +18,9 @@ def spm_global(vol: ArrayLike) -> ArrayLike:
     ArrayLike
         SPM global metric for `vol`
     """
-    return np.mean(vol[vol > np.mean(vol) / 8])
+    T = np.mean(vol) / 8
+    
+    return np.mean(vol[vol > T])
 
 
 def get_spm_globals(file_name: str) -> ArrayLike:
