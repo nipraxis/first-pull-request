@@ -55,7 +55,10 @@ def get_spm_globals(fname):
         SPM global metric for each 3D volume in the 4D image.
     """
     img = nb.load(fname)
-    spm_vals = spm_global(img.get_fdata())
+    data = img.get_fdata()
+    spm_vals = []
+    for t in range(data.size[3]):
+        spm_vals.append(spm_global(data[:,:,:,t]))
     return spm_vals
 
 
