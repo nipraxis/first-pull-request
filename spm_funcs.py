@@ -57,10 +57,10 @@ def get_spm_globals(fname):
     img = nib.load(fname)
     data = img.get_fdata()
     spm_vals = []
-    for i in range(data.shape[-1]):
-        vol = data[..., i]
+    for t in range(data.shape[-1]):
+        vol = data[..., t]
         spm_vals.append(spm_global(vol))
-    return spm_vals  # Return the result.
+    return np.array(spm_vals)  # Return the result.
 
 
 def main():
