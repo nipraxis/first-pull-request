@@ -57,11 +57,11 @@ def get_spm_globals(fname):
     img = nib.load(fname)
     data = img.get_fdata()
 
-    vals = np.array([
+    spm_vals = np.array([
         spm_global(data[:,:,:,vol]) for vol in range(img.shape[-1])
     ])
 
-    return vals
+    return spm_vals
 
 
 def main():
