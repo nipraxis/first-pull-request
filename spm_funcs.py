@@ -54,9 +54,16 @@ def get_spm_globals(fname):
     spm_vals : array
         SPM global metric for each 3D volume in the 4D image.
     """
-    # +++your code here+++
-    # return
-
+    #- Load the image given by "fname".
+    img = nib.load(fname)
+    #- Get the data
+    data = img.get_fdata()
+    #- Calculate the SPM global value for each volume.
+    spm_vals = []
+    for i in range(data.shape[-1]):
+        volume = data[:, :, :, i]
+        spm_vals.append(spm_global(volume))
+    return spm_vals  # Return the result.
 
 def main():
     # This function run when file executed as a script
