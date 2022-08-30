@@ -37,8 +37,14 @@ def spm_global(vol):
     g : float
         SPM global metric for `vol`
     """
-    T = np.mean(vol) / 8
-    return np.mean(vol[vol > T])
+    M = np.mean(vol)
+    T = M/8
+    #- Select voxels greater than T
+    voxels_within = vol>T
+    #- Calculate mean
+    mean_over_T = np.mean(vol[voxels_within])
+    # Show the result
+    return mean_over_T
 
 
 def get_spm_globals(fname):
@@ -54,8 +60,18 @@ def get_spm_globals(fname):
     spm_vals : array
         SPM global metric for each 3D volume in the 4D image.
     """
-    # +++your code here+++
-    # return
+    #- Load the image given by "fname".
+    img = nib.load(fname)
+    #- Get the data
+    data = img.get_fdata()
+    #- Calculate the SPM global value for each volume.
+    spm_vals = []
+    for i in range(data.shape[3]): #we could also use -1 here
+        vol = data[...,i]
+        x = spm_global(vol) #you can either put this directly inside the append method or 
+                            #... you can save a temporary varibale in the same loop
+        spm_vals.append(x)
+    return spm_vals
 
 
 def main():
