@@ -59,10 +59,8 @@ def get_spm_globals(fname):
     # Get the data
     data = img.get_fdata()
     # Calculate the SPM global value for each volume
-    spm_vals = []
-    for i in range(data.shape[-1]):
-    	spm_vals.append(spm_global(data[...,i]))
-    return np.array(spm_vals)
+    spm_vals = np.array([spm_global(data[...,i]) for i in range(data.shape[-1])])
+    return spm_vals
 
 
 def main():
