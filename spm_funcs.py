@@ -17,6 +17,7 @@ or better, in IPython::
     %run spm_funcs.py
 """
 
+from turtle import fd
 import numpy as np
 
 import nibabel as nib
@@ -54,8 +55,12 @@ def get_spm_globals(fname):
     spm_vals : array
         SPM global metric for each 3D volume in the 4D image.
     """
-    # +++your code here+++
-    # return
+    img = nib.load(fname)
+    fdata = img.get_fdata()
+    ret_vals = []
+    for i in range(fdata.shape[-1]):
+        ret_vals.append(spm_global(fdata[...,i]))
+    return ret_vals
 
 
 def main():
