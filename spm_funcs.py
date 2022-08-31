@@ -17,7 +17,6 @@ or better, in IPython::
     %run spm_funcs.py
 """
 
-from turtle import fd
 import numpy as np
 
 import nibabel as nib
