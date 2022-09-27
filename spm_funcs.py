@@ -55,6 +55,7 @@ def get_spm_globals(fname):
         SPM global metric for each 3D volume in the 4D image.
     """
     # +++your code here+++
+    print(" write code here ")
     # return
 
 
