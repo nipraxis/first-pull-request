@@ -57,7 +57,6 @@ def get_spm_globals(fname):
     img = nib.load(fname) # Load image
     data = img.get_fdata() # Get image data
 
-    spm_values = np.asarray([]) # create empty array for spm values per volume
 
     return [
         spm_global(data[..., i])
