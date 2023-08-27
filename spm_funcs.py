@@ -18,15 +18,12 @@ or better, in IPython::
 """
 
 import numpy as np
-
 import nibabel as nib
-
 import nipraxis
 
 
 def spm_global(vol):
     """ Calculate SPM global metric for array `vol`
-
     Parameters
     ----------
     vol : array
@@ -54,8 +51,13 @@ def get_spm_globals(fname):
     spm_vals : array
         SPM global metric for each 3D volume in the 4D image.
     """
-    # +++your code here+++
-    # return
+    image = nib.load(fname)         # load the image with nibabel module
+    data = image.get_fdata()        # load the data to memory
+    spm_vals = []                   # create an empty list
+    for i in range(data.shape[-1]):
+        vol = data[..., i]
+        spm_vals.append(spm_global(vol))
+    return spm_vals                 # return
 
 
 def main():
