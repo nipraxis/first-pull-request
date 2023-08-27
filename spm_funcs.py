@@ -23,7 +23,6 @@ import nibabel as nib
 
 import nipraxis
 
-
 def spm_global(vol):
     """ Calculate SPM global metric for array `vol`
 
@@ -54,8 +53,15 @@ def get_spm_globals(fname):
     spm_vals : array
         SPM global metric for each 3D volume in the 4D image.
     """
+
+    img = nib.load(fname)
+    data = img.get_fdata()
+    spm_vals = []
+    for i in range(data.shape[-1]):
+        vol = data[..., i]
+        spm_vals.append(spm_global(vol))
     # +++your code here+++
-    # return
+    return spm_vals
 
 
 def main():
